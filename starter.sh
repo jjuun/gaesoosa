@@ -1,4 +1,6 @@
 #!/bin/bash
+
+#start script
 JAVA_HOME="/usr"
 APP_HOME="/home/ubuntu/deploy/gaesoosa/build/libs"
 APP_NAME="gaesoosa-0.0.1-SNAPSHOT"
