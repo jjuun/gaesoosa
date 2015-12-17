@@ -15,6 +15,31 @@
         FROM user
         WHERE user.id = #{value}
     </select>
+
+    <insert id="insert" parameterType="com.gaesoosa.User">
+        INSERT INTO user (
+            nickname,
+            address,
+            profile_image,
+            access_key
+        )
+        VALUES (
+            #{nickname},
+            #{address},
+            #{accessKey},
+            #{profileImage}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.gaesoosa.User">
+        UPDATE  user SET
+        nickname = #{nickname},
+        address = #{address},
+        profile_image = #{profileImage},
+        access_key = #{accessKey}
+        WHERE id = #{id}
+    </update>
+
     <!--
         <select id="selectByUserName" resultType="com.gaesoosa.User">
             SELECT
@@ -25,16 +50,6 @@
             WHERE user.username = #{userName}
         </select>
 
-        <insert id="insert" parameterType="com.gaesoosa.User">
-            INSERT INTO user (
-            username,
-            enc_password
-            )
-            VALUES (
-            #{userName},
-            #{password}
-            )
-        </insert>
 
         <update id="update" parameterType="com.gaesoosa.User">
             UPDATE user SET

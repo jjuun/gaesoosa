@@ -3,6 +3,9 @@ package com.gaesoosa;
 public class User {
 	private int	id;
 	private String nickname;
+	private String address;
+	private String accessKey;
+	private String profileImage;
 
 	public int getId() {
 		return id;
@@ -18,5 +21,29 @@ public class User {
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getAccessKey() {
+		return accessKey;
+	}
+
+	public void setAccessKey(String accessKey) {
+		this.accessKey = accessKey;
+	}
+
+	public String getProfileImage() {
+		return profileImage;
+	}
+
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
 	}
 }

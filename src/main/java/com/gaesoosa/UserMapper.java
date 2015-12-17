@@ -14,9 +14,11 @@ public interface UserMapper {
 
 	public User selectOne(Long id);
 
+	public void insert(User user);
+
+	public void update(User user);
+
 //	public User selectByUserName(@Param("userName") String userName);
-//
-//	public void insert(User user);
 //
 //	public void update(User user);
 //
