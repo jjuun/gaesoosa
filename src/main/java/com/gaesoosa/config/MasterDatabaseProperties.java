@@ -1,4 +1,4 @@
-package com.gaesoosa;
+package com.gaesoosa.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

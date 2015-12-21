@@ -1,4 +1,4 @@
-package com.gaesoosa;
+package com.gaesoosa.config;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;

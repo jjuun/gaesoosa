@@ -1,4 +1,4 @@
-package com.gaesoosa;
+package com.gaesoosa.model;
 
 public class User {
 	private int	id;

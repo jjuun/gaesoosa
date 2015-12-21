@@ -1,4 +1,4 @@
-package com.gaesoosa;
+package com.gaesoosa.config;
 
 /**
  * Created by leejun on 15. 12. 14..

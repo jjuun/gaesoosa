@@ -1,5 +1,7 @@
-package com.gaesoosa;
+package com.gaesoosa.controller;
 
+import com.gaesoosa.mapper.UserMapper;
+import com.gaesoosa.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
