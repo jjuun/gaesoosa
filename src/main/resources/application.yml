@@ -4,7 +4,7 @@ spring:
 datasource:
   master:
       driver-class-name: "com.mysql.jdbc.Driver"
-      url: "jdbc:mysql://gaesoosa-db.cllxzz8hai1n.us-east-1.rds.amazonaws.com:3306/gaesoosa?useUnicode=true&charaterEncoding=utf-8"
+      url: "jdbc:mysql://gaesoosa-db.cllxzz8hai1n.us-east-1.rds.amazonaws.com:3306/gaesoosa?useUnicode=true&characterEncoding=utf8"
       user-name: "gaemaster"
       password: "gaemaster"
       initial-size: 10
