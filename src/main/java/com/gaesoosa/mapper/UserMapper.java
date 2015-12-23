@@ -12,15 +12,14 @@ public interface UserMapper {
 
 	public List<User> selectList();
 
-	public User selectOne(Long id);
+	public User selectOne(int id);
 
 	public void insert(User user);
 
 	public void update(User user);
 
+	public void delete(int id);
+
 //	public User selectByUserName(@Param("userName") String userName);
 //
-//	public void update(User user);
-//
-//	public void delete(User user);
 }

@@ -39,11 +39,11 @@ public class UserMapperTests {
         assertThat("user count equal", users.size() == 3);
     }
 
-    @Ignore
+    @Test
     public void insertUser() {
         user = new User();
-        user.setNickname("jun");
-        user.setAddress("seoul");
+        user.setNickname("정재욱");
+        user.setAddress("서울");
         user.setProfileImage(null);
         user.setAccessKey(null);
 
@@ -55,12 +55,12 @@ public class UserMapperTests {
 //		assertThat("success", selectUser());
     }
 
-    @Test
+    @Ignore
     public void updateUser(){
         user = new User();
         user.setNickname("jun_update");
-        user.setAddress("sungname");
-        user.setProfileImage(null);
+        user.setAddress("sungnam");
+        user.setProfileImage("http://www.daum.net");
         user.setAccessKey(null);
         user.setId(10);
 

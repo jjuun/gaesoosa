@@ -7,7 +7,7 @@
         FROM user
     </select>
 
-    <select id="selectOne" resultType="User" parameterType="Long">
+    <select id="selectOne" resultType="User" parameterType="Integer">
         SELECT
         id, nickname, access_key as accessKey, address, profile_image as profileImage
         FROM user
@@ -38,6 +38,9 @@
         WHERE id = #{id}
     </update>
 
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM user WHERE user.id = #{id}
+    </delete>
     <!--
         <select id="selectByUserName" resultType="com.gaesoosa.User">
             SELECT
