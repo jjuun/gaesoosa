@@ -33,13 +33,19 @@ public class UserController {
 	}
 
 	@RequestMapping(method=RequestMethod.DELETE, value="{id}")
-	public boolean deleteUser(@PathVariable int id) {
+	public boolean deleteUser(@PathVariable int id)
+	{
+		userMapper.delete(id);
 		return true;
 	}
 
 	@RequestMapping(method=RequestMethod.PUT, value="{id}")
-	public User updateUser(@PathVariable int id, @RequestBody User user, HttpServletRequest request) {
+	public User updateUser(@PathVariable int id, @ModelAttribute User user) {
 		user.setId(id);
+		User user1 = userMapper.selectOne(id);
+		if(user1 == null ){
+			return null;
+		}
 		userMapper.update(user);
 		return user;
 	}

@@ -24,8 +24,8 @@
         VALUES (
             #{nickname},
             #{address},
-            #{accessKey},
-            #{profileImage}
+            #{profileImage},
+            #{accessKey}
         )
     </insert>
 
