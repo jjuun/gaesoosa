@@ -7,9 +7,26 @@
 <body>
 <h5>가입</h5>
 <form method="post" action="">
-    이름 :<input type="text" name="nickname"><br>
-    주소 :<input type="text" name="address"><br>
+    이름: <input type="text" name="nickname" /><br>
+    주소: <input type="text" name="address" /><br>
+    kakaoKey: <input type="text" name="kakaokey" /><br>
+    <input type="button" value="카카오인증" onclick="oAuthKakao()">
     <input type="submit" value="가입">
 </form>
+
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script>
+    Kakao.init('65d720156619ff0ac32d1ad8faa01196');
+    var oAuthKakao = function(){
+        Kakao.Auth.login({
+            success: function(authObj) {
+                document.getElementById("kakaokey").value = JSON.stringify(authObj);
+            },
+            fail: function(err) {
+                alert(JSON.stringify(err))
+            }
+        });
+    }
+</script>
 </body>
 </html>
