@@ -50,7 +50,7 @@
                     jQuery("#access_token").value = authObj.access_token;
                     jQuery("#refresh_token").value = authObj.refresh_token;
 
-                    this.getKakaoInfo();
+                    kakaoLogin.getKakaoInfo();
                 },
                 fail: function(err) {
                     console.log(err);
