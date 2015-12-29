@@ -51,8 +51,8 @@
                     console.log(authObj);
                     this.authObj = authObj;
 
-                    jQuery("#access_token").value = authObj.access_token;
-                    jQuery("#refresh_token").value = authObj.refresh_token;
+                    jQuery("#access_token").val(authObj.access_token)
+                    jQuery("#refresh_token").val(authObj.refresh_token);
 
                     kakaoLogin.getKakaoInfo();
                 },
@@ -75,7 +75,7 @@
                 url: '/v1/user/me',
                 success: function(res) {
                     console.log(res);
-                    jQuery("#kakaoinfo").value = JSON.stringify(res);
+                    jQuery("#kakaoinfo").val(JSON.stringify(res));
                 },
                 fail: function(error) {
                     alert(JSON.stringify(error))
