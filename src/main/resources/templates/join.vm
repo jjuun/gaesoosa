@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>join member</title>
+    <script src="js/jquery-1.11.3.js"></script>
 </head>
 <body>
 <h5>가입</h5>
 <form method="post" action="">
     이름: <input type="text" name="nickname" /><br>
     주소: <input type="text" name="address" /><br>
-    kakaoKey: <input type="text" id="kakaokey" name="kakaokey" /><br>
+    kakaoKey: <input type="text" width="200" id="access_token" name="access_token" /><br>
+    kakaoKey: <input type="text" width="200" id="refresh_token" name="refresh_token" /><br>
     <input type="button" value="카카오인증" onclick="oAuthKakao()">
     <input type="submit" value="가입">
 </form>
@@ -17,16 +19,74 @@
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
     Kakao.init('65d720156619ff0ac32d1ad8faa01196');
+    /*
     var oAuthKakao = function(){
         Kakao.Auth.login({
             success: function(authObj) {
-                var temp = JSON.stringify(authObj);
-                document.getElementById("kakaokey").value = temp;
+
+                console.log(authObj);
+
+                jQuery("#access_token").value = authObj.access_token;
+                jQuery("#refresh_token").value = authObj.refresh_token;
+                afterKakaoAccess();
             },
             fail: function(err) {
-                alert(JSON.stringify(err))
+                console.log(err);
             }
         });
+    }
+    */
+    var kakaoLogin = {
+        authObj: '',
+
+        init: function(){
+            Kakao.Auth.login({
+                success: function(authObj) {
+
+                    console.log(authObj);
+                    this.authObj = authObj;
+
+                    jQuery("#access_token").value = authObj.access_token;
+                    jQuery("#refresh_token").value = authObj.refresh_token;
+
+                    this.getKakaoInfo();
+                },
+                fail: function(err) {
+                    console.log(err);
+                }
+            });
+            /*
+            var authObj = {
+                "access_token":"vXfuO3zbcHp7GNGhYCGLnif56wy5xiitn5LoRawQTJgAAAFR6-2MhA",
+                "token_type":"bearer",
+                "refresh_token":"X3_hEbBXbuDt1Kzz1iMFkuxH9M22GTlx5kprP6wQTJgAAAFR6-2Mgg",
+                "expires_in":7199,
+                "scope":"story_publish story_read profile"
+            }
+            */
+        },
+        getKakaoInfo: function(){
+            Kakao.API.request({
+                url: '/v1/user/me',
+                success: function(res) {
+                    console.log(res);
+                },
+                fail: function(error) {
+                    alert(JSON.stringify(error))
+                }
+            });
+        },
+        checkId: function(){
+//            this.authObj.access_token
+            jQuery.ajax({
+                    url: '/user/' + this.authObj.access_token,
+                    type: 'get',
+                    success: function(data){
+                        console.log(data);
+                    }
+                }
+            )
+        }
     }
 </script>
 </body>
