@@ -5,14 +5,18 @@
     <title>join member</title>
 ##    <script src="./js/jquery-1.11.3.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+    <style type="text/css">
+        textarea { width: 100% }
+    </style>
 </head>
 <body>
 <h5>가입</h5>
 <form method="post" action="">
-    이름: <input type="text" name="nickname" /><br>
-    주소: <input type="text" name="address" /><br>
-    kakaoKey: <input type="text" width="200" id="access_token" name="access_token" /><br>
-    kakaoKey: <input type="text" width="200" id="refresh_token" name="refresh_token" /><br>
+    이름: <input type="text" name="nickname" /><br />
+    주소: <input type="text" name="address" /><br />
+    access_token: <textarea rows="4" id="access_token" name="access_token"></textarea><br />
+    refresh_token: <textarea rows="4" id="refresh_token" name="refresh_token"></textarea><br />
+    kakao info: <textarea rows="6" id="kakaoinfo" name="kakaoinfo"></textarea><br />
     <input type="button" value="카카오인증" onclick="kakaoLogin.login()">
     <input type="submit" value="가입">
 </form>
@@ -71,6 +75,7 @@
                 url: '/v1/user/me',
                 success: function(res) {
                     console.log(res);
+                    jQuery("#kakaoinfo").value = JSON.stringify(res);
                 },
                 fail: function(error) {
                     alert(JSON.stringify(error))
