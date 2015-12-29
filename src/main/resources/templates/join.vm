@@ -12,11 +12,12 @@
 <body>
 <h5>가입</h5>
 <form method="post" action="">
-    이름: <input type="text" name="nickname" /><br />
-    주소: <input type="text" name="address" /><br />
-    access_token: <textarea rows="4" id="access_token" name="access_token"></textarea><br />
-    refresh_token: <textarea rows="4" id="refresh_token" name="refresh_token"></textarea><br />
-    kakao info: <textarea rows="6" id="kakaoinfo" name="kakaoinfo"></textarea><br />
+    이름: <input type="text" style="width: 300px;" id="nickname" name="nickname" /><br />
+    프로필: <img src="" width="200" id="profile_image" alt="" />
+    썸네일: <img src="" width="200" id="thumbnail_image" alt="" />
+    access_token: <textarea rows="2" id="access_token" name="access_token"></textarea><br />
+    refresh_token: <textarea rows="2" id="refresh_token" name="refresh_token"></textarea><br />
+    kakao info: <textarea rows="2" id="kakaoinfo" name="kakaoinfo"></textarea><br />
     <input type="button" value="카카오인증" onclick="kakaoLogin.login()">
     <input type="submit" value="가입">
 </form>
@@ -43,12 +44,12 @@
     */
     var kakaoLogin = {
         authObj: '',
+        authInfo: '',
 
         login: function(){
             Kakao.Auth.login({
                 success: function(authObj) {
 
-                    console.log(authObj);
                     this.authObj = authObj;
 
                     jQuery("#access_token").val(authObj.access_token)
@@ -74,18 +75,21 @@
             Kakao.API.request({
                 url: '/v1/user/me',
                 success: function(res) {
-                    console.log(res);
-                    jQuery("#kakaoinfo").val(JSON.stringify(res));
+                    this.authInfo = res;
+                    jQuery("#nickname").val(res.properties.nickname);
+                    jQuery("#profile_image").src = res.properties.profile_image;
+                    jQuery("#thumbnail_image").src = res.properties.thumbnail_image;
+                    jQuery("#kakaoinfo").val(res.id);
                 },
                 fail: function(error) {
                     alert(JSON.stringify(error))
                 }
             });
         },
-        checkId: function(){
+        checkId: function(id){
 //            this.authObj.access_token
             jQuery.ajax({
-                    url: '/user/' + this.authObj.access_token,
+                    url: '/user/' + id,
                     type: 'get',
                     success: function(data){
                         console.log(data);
