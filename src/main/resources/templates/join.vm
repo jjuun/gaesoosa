@@ -9,7 +9,7 @@
 <form method="post" action="">
     이름: <input type="text" name="nickname" /><br>
     주소: <input type="text" name="address" /><br>
-    kakaoKey: <input type="text" name="kakaokey" /><br>
+    kakaoKey: <input type="text" id="kakaokey" name="kakaokey" /><br>
     <input type="button" value="카카오인증" onclick="oAuthKakao()">
     <input type="submit" value="가입">
 </form>
@@ -20,8 +20,8 @@
     var oAuthKakao = function(){
         Kakao.Auth.login({
             success: function(authObj) {
-                alert(JSON.stringify(authObj));
-                document.getElementById("kakaokey").value = JSON.stringify(authObj);
+                var temp = JSON.stringify(authObj);
+                document.getElementById("kakaokey").value = temp;
             },
             fail: function(err) {
                 alert(JSON.stringify(err))
