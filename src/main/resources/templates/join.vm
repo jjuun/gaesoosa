@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>join member</title>
-    <script src="js/jquery-1.11.3.js"></script>
+##    <script src="./js/jquery-1.11.3.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 </head>
 <body>
 <h5>가입</h5>
@@ -12,7 +13,7 @@
     주소: <input type="text" name="address" /><br>
     kakaoKey: <input type="text" width="200" id="access_token" name="access_token" /><br>
     kakaoKey: <input type="text" width="200" id="refresh_token" name="refresh_token" /><br>
-    <input type="button" value="카카오인증" onclick="oAuthKakao()">
+    <input type="button" value="카카오인증" onclick="kakaoLogin.login()">
     <input type="submit" value="가입">
 </form>
 
@@ -39,7 +40,7 @@
     var kakaoLogin = {
         authObj: '',
 
-        init: function(){
+        login: function(){
             Kakao.Auth.login({
                 success: function(authObj) {
 
