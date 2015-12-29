@@ -20,6 +20,7 @@
     var oAuthKakao = function(){
         Kakao.Auth.login({
             success: function(authObj) {
+                alert(JSON.stringify(authObj));
                 document.getElementById("kakaokey").value = JSON.stringify(authObj);
             },
             fail: function(err) {
