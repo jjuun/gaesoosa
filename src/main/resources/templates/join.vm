@@ -10,6 +10,7 @@
     </style>
 </head>
 <body>
+
 <h5>가입</h5>
 <form method="post" action="">
     이름: <input type="text" style="width: 300px;" id="nickname" name="nickname" /><br />
@@ -47,6 +48,7 @@
         authInfo: '',
 
         login: function(){
+            this.checkId(1);
             Kakao.Auth.login({
                 success: function(authObj) {
 
@@ -89,7 +91,7 @@
         checkId: function(id){
 //            this.authObj.access_token
             jQuery.ajax({
-                    url: '/user/' + id,
+                    url: '/users/' + id,
                     type: 'get',
                     success: function(data){
                         console.log(data);

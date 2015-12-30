@@ -36,6 +36,7 @@ dependencies {
     compile("org.mybatis:mybatis:3.2.4")
     compile("org.mybatis:mybatis-spring:1.2.2")
     compile("org.springframework.boot:spring-boot-starter-velocity")
+    compile("org.springframework.boot:spring-boot-devtools")
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
@@ -45,6 +46,10 @@ eclipse {
          containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
          containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7'
     }
+}
+
+bootRun {
+    addResources = true
 }
 
 task wrapper(type: Wrapper) {
