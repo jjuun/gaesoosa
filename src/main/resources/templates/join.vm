@@ -6,22 +6,22 @@
     <script src="/js/jquery-1.11.3.js"></script>
 ##    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
     <style type="text/css">
-        textarea { width: 100% }
+        textarea { width: 300px; }
     </style>
 </head>
 <body>
 
 <h5>가입</h5>
 <p>카카오 인증을 해주세요.</p>
-<form method="post" action="">
+<form method="post" onsubmit="return false;" action="">
     <p><input type="button" value="카카오인증" onclick="kakaoLogin.login()"></p>
     이름: <input type="text" style="width: 300px;" id="nickname" name="nickname" /><br />
+    주소: <input type="text" style="width: 300px;" id="address" name="address" /><br />
     프로필: <img src="" width="200" id="profile_image" alt="" />
-    썸네일: <img src="" width="200" id="thumbnail_image" alt="" /><br />
-    access_token: <textarea rows="2" id="access_token" name="access_token"></textarea><br />
-    refresh_token: <textarea rows="2" id="refresh_token" name="refresh_token"></textarea><br />
-    kakao id: <textarea rows="2" id="kakaoinfo" name="kakaoinfo"></textarea><br />
-    <input type="submit" value="가입">
+##    썸네일: <img src="" width="200" id="thumbnail_image" alt="" /><br />
+##    access_token: <textarea rows="2" id="access_token" name="access_token"></textarea><br />
+    refresh_token: <textarea rows="2" id="accessKey" name="accessKey"></textarea><br />
+    <input type="button" id="submitbtn" value="가입" disabled="disabled" />
 </form>
 
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -47,16 +47,34 @@
     var kakaoLogin = {
         authObj: '',
         authInfo: '',
-
+        init: function(){
+            jQuery("#submitbtn").click = function(){
+                jQuery.ajax({
+                            url: '/users/',
+                            type: 'post',
+                            data: {
+                                id: kakaoLogin.authInfo.id,
+                                nickname: jQuery("#nickname").val(),
+                                address: jQuery("#address").val(),
+                                profileImage: kakaoLogin.authInfo.properties.profile_image,
+                                accessKey: kakaoLogin.authObj.refresh_token,
+                            },
+                            success: function(data){
+                                if(data && data.id){
+                                    alert(data.nickname);
+                                }
+                            }
+                        }
+                )
+            }
+        },
         login: function(){
+            self.authInfo.id = new Date() + 1;
             var self = this;
             Kakao.Auth.login({
                 success: function(authObj) {
                     self.authObj = authObj;
-
-                    jQuery("#access_token").val(authObj.access_token)
-                    jQuery("#refresh_token").val(authObj.refresh_token);
-
+                    jQuery("#accessKey").val(authObj.refresh_token);
                     kakaoLogin.getKakaoInfo();
                 },
                 fail: function(err) {
@@ -86,7 +104,7 @@
                 }
             });
         },
-        checkId: function(id){
+        checkId: function(){
             var self = this;
 //            this.authObj.access_token
             jQuery.ajax({
@@ -97,6 +115,7 @@
                             alert("이미 가입한 아이디 입니다.");
                         } else {
                             self.fillRegiForm();
+                            self.enableSubmit();
                         }
                     }
                 }
@@ -104,11 +123,14 @@
         },
         fillRegiForm: function(){
             jQuery("#nickname").val(this.authInfo.properties.nickname);
-
+            jQuery("#profileImage").val(this.authInfo.properties.profile_image);
             jQuery("#profile_image").attr('src', this.authInfo.properties.profile_image);
-            jQuery("#thumbnail_image").attr('src', this.authInfo.properties.thumbnail_image);
+        },
+        enableSubmit: function(){
+            jQuery("#submitbtn").attr('enabled', '');
         }
     }
+    kakaoLogin.init();
 </script>
 </body>
 </html>
