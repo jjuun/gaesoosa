@@ -17,10 +17,10 @@
     <p><input type="button" value="카카오인증" onclick="kakaoLogin.login()"></p>
     이름: <input type="text" style="width: 300px;" id="nickname" name="nickname" /><br />
     프로필: <img src="" width="200" id="profile_image" alt="" />
-    썸네일: <img src="" width="200" id="thumbnail_image" alt="" />
+    썸네일: <img src="" width="200" id="thumbnail_image" alt="" /><br />
     access_token: <textarea rows="2" id="access_token" name="access_token"></textarea><br />
     refresh_token: <textarea rows="2" id="refresh_token" name="refresh_token"></textarea><br />
-    kakao info: <textarea rows="2" id="kakaoinfo" name="kakaoinfo"></textarea><br />
+    kakao id: <textarea rows="2" id="kakaoinfo" name="kakaoinfo"></textarea><br />
     <input type="submit" value="가입">
 </form>
 
@@ -49,11 +49,10 @@
         authInfo: '',
 
         login: function(){
-            this.checkId(1);
+            var self = this;
             Kakao.Auth.login({
                 success: function(authObj) {
-
-                    this.authObj = authObj;
+                    self.authObj = authObj;
 
                     jQuery("#access_token").val(authObj.access_token)
                     jQuery("#refresh_token").val(authObj.refresh_token);
@@ -75,15 +74,12 @@
             */
         },
         getKakaoInfo: function(){
+            var self = this;
             Kakao.API.request({
                 url: '/v1/user/me',
                 success: function(res) {
-                    this.authInfo = res;
-                    jQuery("#nickname").val(res.properties.nickname);
-
-                    jQuery("#profile_image").attr('src', res.properties.profile_image);
-                    jQuery("#thumbnail_image").attr('src', res.properties.thumbnail_image);
-                    jQuery("#kakaoinfo").val(res.id);
+                    self.authInfo = res;
+                    self.checkId();
                 },
                 fail: function(error) {
                     alert(JSON.stringify(error))
@@ -91,15 +87,26 @@
             });
         },
         checkId: function(id){
+            var self = this;
 //            this.authObj.access_token
             jQuery.ajax({
                     url: '/users/' + id,
                     type: 'get',
                     success: function(data){
-                        console.log(data);
+                        if(data.id == self.authInfo.id){
+                            alert("이미 가입한 아이디 입니다.");
+                        } else {
+                            self.fillRegiForm();
+                        }
                     }
                 }
             )
+        },
+        fillRegiForm: function(){
+            jQuery("#nickname").val(this.authInfo.properties.nickname);
+
+            jQuery("#profile_image").attr('src', this.authInfo.properties.profile_image);
+            jQuery("#thumbnail_image").attr('src', this.authInfo.properties.thumbnail_image);
         }
     }
 </script>
