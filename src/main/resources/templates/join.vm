@@ -69,7 +69,7 @@
             }
         },
         login: function(){
-            self.authInfo.id = new Date() + 1;
+//            self.authInfo.id = new Date() + 1; // for local test only
             var self = this;
             Kakao.Auth.login({
                 success: function(authObj) {
