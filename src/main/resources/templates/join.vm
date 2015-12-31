@@ -127,7 +127,7 @@
             jQuery("#profile_image").attr('src', this.authInfo.properties.profile_image);
         },
         enableSubmit: function(){
-            jQuery("#submitbtn").attr('enabled', '');
+            jQuery("#submitbtn").attr('disabled', 'false');
         }
     }
     kakaoLogin.init();
