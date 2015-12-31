@@ -52,7 +52,7 @@
         },
         initSubmit: function(){
             jQuery("#submitbtn").click(function(){
-                this.sendJoin();
+                kakaoLogin.sendJoin();
             });
         },
         sendJoin: function(){

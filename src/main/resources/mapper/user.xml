@@ -16,12 +16,14 @@
 
     <insert id="insert" parameterType="com.gaesoosa.model.User">
         INSERT INTO user (
+            id,
             nickname,
             address,
             profile_image,
             access_key
         )
         VALUES (
+            #{id},
             #{nickname},
             #{address},
             #{profileImage},
