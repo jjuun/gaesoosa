@@ -27,23 +27,6 @@
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
     Kakao.init('65d720156619ff0ac32d1ad8faa01196');
-    /*
-    var oAuthKakao = function(){
-        Kakao.Auth.login({
-            success: function(authObj) {
-
-                console.log(authObj);
-
-                jQuery("#access_token").value = authObj.access_token;
-                jQuery("#refresh_token").value = authObj.refresh_token;
-                afterKakaoAccess();
-            },
-            fail: function(err) {
-                console.log(err);
-            }
-        });
-    }
-    */
     var kakaoLogin = {
         authObj: '',
         authInfo: '',
@@ -77,7 +60,6 @@
             )
         },
         login: function(){
-//            self.authInfo.id = new Date() + 1; // for local test only
             var self = this;
             Kakao.Auth.login({
                 success: function(authObj) {
@@ -89,15 +71,6 @@
                     console.log(err);
                 }
             });
-            /*
-            var authObj = {
-                "access_token":"vXfuO3zbcHp7GNGhYCGLnif56wy5xiitn5LoRawQTJgAAAFR6-2MhA",
-                "token_type":"bearer",
-                "refresh_token":"X3_hEbBXbuDt1Kzz1iMFkuxH9M22GTlx5kprP6wQTJgAAAFR6-2Mgg",
-                "expires_in":7199,
-                "scope":"story_publish story_read profile"
-            }
-            */
         },
         getKakaoInfo: function(){
             var self = this;
@@ -114,7 +87,6 @@
         },
         checkId: function(){
             var self = this;
-//            this.authObj.access_token
             jQuery.ajax({
                     url: '/users/' + self.authInfo.id,
                     type: 'get',
