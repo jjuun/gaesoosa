@@ -48,25 +48,31 @@
         authObj: '',
         authInfo: '',
         init: function(){
-            jQuery("#submitbtn").click = function(){
-                jQuery.ajax({
-                            url: '/users/',
-                            type: 'post',
-                            data: {
-                                id: kakaoLogin.authInfo.id,
-                                nickname: jQuery("#nickname").val(),
-                                address: jQuery("#address").val(),
-                                profileImage: kakaoLogin.authInfo.properties.profile_image,
-                                accessKey: kakaoLogin.authObj.refresh_token,
-                            },
-                            success: function(data){
-                                if(data && data.id){
-                                    alert(data.nickname);
-                                }
+            this.initSubmit();
+        },
+        initSubmit: function(){
+            jQuery("#submitbtn").click(function(){
+                this.sendJoin();
+            });
+        },
+        sendJoin: function(){
+            jQuery.ajax({
+                        url: '/users/',
+                        type: 'post',
+                        data: {
+                            id: kakaoLogin.authInfo.id,
+                            nickname: jQuery("#nickname").val(),
+                            address: jQuery("#address").val(),
+                            profileImage: kakaoLogin.authInfo.properties.profile_image,
+                            accessKey: kakaoLogin.authObj.refresh_token,
+                        },
+                        success: function(data){
+                            if(data && data.id){
+                                alert(data.nickname);
                             }
                         }
-                )
-            }
+                    }
+            )
         },
         login: function(){
 //            self.authInfo.id = new Date() + 1; // for local test only
@@ -127,7 +133,7 @@
             jQuery("#profile_image").attr('src', this.authInfo.properties.profile_image);
         },
         enableSubmit: function(){
-            jQuery("#submitbtn").attr('disabled', 'false');
+            jQuery("#submitbtn").attr('disabled', false);
         }
     }
     kakaoLogin.init();
