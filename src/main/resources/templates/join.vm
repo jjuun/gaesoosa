@@ -52,6 +52,7 @@
         },
         initSubmit: function(){
             jQuery("#submitbtn").click(function(){
+                kakaoLogin.checkId();
                 kakaoLogin.sendJoin();
             });
         },
@@ -68,6 +69,7 @@
                         },
                         success: function(data){
                             if(data && data.id){
+                                console.log(data);
                                 alert(data.nickname);
                             }
                         }
