@@ -90,10 +90,10 @@
             var self = this;
 //            this.authObj.access_token
             jQuery.ajax({
-                    url: '/users/' + id,
+                    url: '/users/' + self.authInfo.id,
                     type: 'get',
                     success: function(data){
-                        if(data.id == self.authInfo.id){
+                        if(data && data.id == self.authInfo.id){
                             alert("이미 가입한 아이디 입니다.");
                         } else {
                             self.fillRegiForm();
